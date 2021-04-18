@@ -37,6 +37,7 @@ class Menu extends Phaser.Scene{
         // define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+
     }
 
     update() {
@@ -44,6 +45,7 @@ class Menu extends Phaser.Scene{
           // easy mode
           game.settings = {
             spaceshipSpeed: 3,
+            smallshipSpeed:5,
             gameTimer: 6000    
           }
           this.sound.play('sfx_select');
@@ -53,6 +55,7 @@ class Menu extends Phaser.Scene{
           // hard mode
           game.settings = {
             spaceshipSpeed: 4,
+            smallshipSpeed: 7,
             gameTimer: 4500    
           }
           this.sound.play('sfx_select');

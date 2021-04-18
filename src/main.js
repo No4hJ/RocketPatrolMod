@@ -15,3 +15,6 @@ let starSpeed = 2;
 
 // reserve keyboard bindings
 let keyF, keyR, keyLEFT, keyRIGHT;
+let highScore = [];
+let isFiring = false;
+

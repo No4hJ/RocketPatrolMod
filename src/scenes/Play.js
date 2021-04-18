@@ -6,7 +6,8 @@ class Play extends Phaser.Scene{
     //init(), preload(), create(), update()
     preload(){
         // load images/tile sprites
-        this.load.image('rocket', './assets/gun.png');
+        this.load.image('cannon', './assets/gun.png');
+        this.load.image('bullet', './assets/bullet.png');
         this.load.image('spaceship', './assets/spaceship.png');
         this.load.image('starfield', './assets/starfield.png');
         // load spritesheet
@@ -19,6 +20,9 @@ class Play extends Phaser.Scene{
     }
 
     create() {
+        //initialize highest score
+        this.highest = 0;
+
         //place starfield
         this.starfield = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'starfield')
         .setOrigin(0, 0);
@@ -36,17 +40,22 @@ class Play extends Phaser.Scene{
         this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.
         config. height, 0xFFFFFF).setOrigin(0, 0); // right bar
 
-        // add rocket (player1)
-        this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - 
-        borderUISize - borderPadding*4.7, 'rocket').setOrigin(0.5, 0);
+        // add cannon (player1)
+        this.p1Cannon = new Cannon(this, game.config.width/2, game.config.height - 
+        borderUISize - borderPadding*4.7, 'cannon').setOrigin(0.5, 0);
+        // add bullet (player 1)
+        this.p1Bullet = new Bullet(this, game.config.width/2, game.config.height - 
+        borderUISize - borderPadding*4.7, 'bullet').setOrigin(0.5, 0);
         
-        // add spaceship (x3)
+        // add spaceship (x4)
         this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4,
         'spaceship', 0, 30).setOrigin(0, 0);
         this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 +
         borderPadding*2, 'spaceship', 0, 20).setOrigin(0, 0);
         this.ship03 = new Spaceship(this, game.config.width,borderUISize*6 + borderPadding*4,
         'spaceship', 0, 10).setOrigin(0, 0);
+        this.ship04 = new SpaceshipSmall(this, game.config.width, borderUISize* 3 + borderPadding * 4,
+        'explosion', 0, 100).setOrigin(0, 0);
             
 
         // define keys
@@ -89,9 +98,13 @@ class Play extends Phaser.Scene{
         // 60-second play clock
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
-            this.add.text (game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).
-            setOrigin(0,5);
-            this.add.text(game.config.width/2, game.config.height/2 + 64, '(R) to Restart or <- for Menu',
+            highScore.push(this.p1Score);
+            this.highest = Math.max(...highScore);
+            console.log(this.highest);
+            console.log(highScore);
+            this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2 + 40, 'HIGH SCORE: ' + this.highest, scoreConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2 + 80, '(R) to Restart or <- for Menu',
             scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
@@ -115,6 +128,7 @@ class Play extends Phaser.Scene{
         this.timeLeft = this.add.text(game.config.width - (borderUISize + borderPadding*23), 
             borderUISize + borderPadding*2, 'TIME LEFT: ' + this.Timer, timeConfig);
 
+
     }
 
     update(){
@@ -132,11 +146,14 @@ class Play extends Phaser.Scene{
 
         if(!this.gameOver) {
             // update rocket
-            this.p1Rocket.update();
+            this.p1Cannon.update();
+            this.p1Bullet.update();
             // update spaceships (x3)
             this.ship01.update();
             this.ship02.update();
-            this.ship03.update();
+            this.ship03.update();  
+            this.ship04.update();
+
             // update timer to get time
             this.Timer = game.settings.gameTimer - this.clock.getElapsed();
             // display updated time
@@ -144,16 +161,20 @@ class Play extends Phaser.Scene{
         }
 
         // check collisions
-        if(this.checkCollision(this.p1Rocket, this.ship03)){
-            this.p1Rocket.reset();
+        if(this.checkCollision(this.p1Bullet, this.ship04)){
+            this.p1Bullet.reset();
+            this.shipExplode(this.ship04);
+        }
+        if(this.checkCollision(this.p1Bullet, this.ship03)){
+            this.p1Bullet.reset();
             this.shipExplode(this.ship03);
         }
-        if(this.checkCollision(this.p1Rocket, this.ship02)){
-            this.p1Rocket.reset();
+        if(this.checkCollision(this.p1Bullet, this.ship02)){
+            this.p1Bullet.reset();
             this.shipExplode(this.ship02);
         }
-        if(this.checkCollision(this.p1Rocket, this.ship01)){
-            this.p1Rocket.reset();
+        if(this.checkCollision(this.p1Bullet, this.ship01)){
+            this.p1Bullet.reset();
             this.shipExplode(this.ship01);
         }
     }
