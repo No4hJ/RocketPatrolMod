@@ -14,7 +14,7 @@ let borderPadding = borderUISize / 3;
 let starSpeed = 2;
 
 // reserve keyboard bindings
-let keyF, keyR, keyLEFT, keyRIGHT;
+let keyF, keyR, keyM, keyLEFT, keyRIGHT;
 let highScore = [];
 let isFiring = false;
 

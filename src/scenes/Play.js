@@ -9,6 +9,7 @@ class Play extends Phaser.Scene{
         this.load.image('cannon', './assets/gun.png');
         this.load.image('bullet', './assets/bullet.png');
         this.load.image('spaceship', './assets/spaceship.png');
+        this.load.image('rocket', './assets/rocket.png');
         this.load.image('starfield', './assets/starfield.png');
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png', {
@@ -55,12 +56,13 @@ class Play extends Phaser.Scene{
         this.ship03 = new Spaceship(this, game.config.width,borderUISize*6 + borderPadding*4,
         'spaceship', 0, 10).setOrigin(0, 0);
         this.ship04 = new SpaceshipSmall(this, game.config.width, borderUISize* 3 + borderPadding * 4,
-        'explosion', 0, 100).setOrigin(0, 0);
+        'rocket', 0, 100).setOrigin(0, 0);
             
 
         // define keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
@@ -104,7 +106,7 @@ class Play extends Phaser.Scene{
             console.log(highScore);
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 40, 'HIGH SCORE: ' + this.highest, scoreConfig).setOrigin(0.5);
-            this.add.text(game.config.width/2, game.config.height/2 + 80, '(R) to Restart or <- for Menu',
+            this.add.text(game.config.width/2, game.config.height/2 + 80, '(R) to Restart or (M) for Menu',
             scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
@@ -138,7 +140,7 @@ class Play extends Phaser.Scene{
         }   
             
         // check key input for returning to menu
-        if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+        if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyM)) {
             this.scene.start("menuScene");
         }
 

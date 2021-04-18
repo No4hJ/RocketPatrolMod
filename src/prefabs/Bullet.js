@@ -13,21 +13,18 @@ class Bullet extends Phaser.GameObjects.Sprite {
     }
 
     update() {
-        // left/ right movement
+        // move invisibly with the cannon
         if(!isFiring) {
+            this.alpha = 0;
             if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
                 this.x -= this.moveSpeed;
             } else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width) {
                 this.x += this.moveSpeed;
             }
         }
-        // fire button
-        if(Phaser.Input.Keyboard.JustDown(keyF) && !isFiring) {
-            isFiring = true;
-            this.sfxRocket.play();   // play sfx
-        }
-        // if fired, move the rocket up
+        // if fired, shoot the bullet
         if(isFiring && this.y >= borderUISize * 3 + borderPadding) {
+            this.alpha = 1;
             this.y -= this.moveSpeed;
         }
         // reset on miss
@@ -36,8 +33,9 @@ class Bullet extends Phaser.GameObjects.Sprite {
         }
     }
 
-    // reset rocket to "ground"
+    // reset bullet to cannon position
     reset() {
+        this.alpha = 0;
         isFiring = false;
         this.y = game.config.height - borderUISize - borderPadding*4.7;
 

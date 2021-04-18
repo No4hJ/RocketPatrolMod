@@ -14,7 +14,6 @@ class Cannon extends Phaser.GameObjects.Sprite {
 
     update() {
         // left/ right movement
-        console.log(isFiring);
         if(!isFiring) {
             if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
                 this.x -= this.moveSpeed;
@@ -27,22 +26,6 @@ class Cannon extends Phaser.GameObjects.Sprite {
             isFiring = true;
             this.sfxRocket.play();   // play sfx
         }
-/*
-        // if fired, move the rocket up
-        if(this.isFiring && this.y >= borderUISize * 3 + borderPadding) {
-            this.y -= this.moveSpeed;
-        }
-        // reset on miss
-        if(this.y <= borderUISize * 3 + borderPadding) {
-            this.reset();
-        }*/
     }
-/*
-    // reset rocket to "ground"
-    reset() {
-        this.isFiring = false;
-        this.y = game.config.height - borderUISize - borderPadding*4.7;
 
-    }
-*/
 }
