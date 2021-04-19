@@ -23,12 +23,13 @@ class Play extends Phaser.Scene{
     }
 
     create() {
-
+        //initialize background music
         let music = this.sound.add('bgm');
+
         //initialize highest score
         this.highest = 0;
 
-        //place starfield
+        //place starfield & earth background
         this.earth = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'earth')
         .setOrigin(0, 0);
         this.starfield = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'starfield')
@@ -60,7 +61,7 @@ class Play extends Phaser.Scene{
         this.p2Bullet = new Bullet2(this, game.config.width/2 + 10, game.config.height - 
         borderUISize - borderPadding*4.7, 'bullet').setOrigin(0.5, 0);
 
-        // add spaceship (x4)
+        // add spaceship (x4) ship04 is the new spaceship type
         this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4,
         'spaceship', 0, 30).setOrigin(0, 0);
         this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 +
@@ -173,6 +174,7 @@ class Play extends Phaser.Scene{
             this.scene.start("menuScene");
         }
 
+        //move the starfield
         this.starfield.tilePositionX -= starSpeed;
 
         if(!this.gameOver) {
