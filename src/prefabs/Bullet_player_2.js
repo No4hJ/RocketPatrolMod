@@ -1,5 +1,5 @@
-// Bullet (player1) prefab
-class Bullet extends Phaser.GameObjects.Sprite {
+// Bullet (player2) prefab
+class Bullet2 extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
 
@@ -14,16 +14,16 @@ class Bullet extends Phaser.GameObjects.Sprite {
 
     update() {
         // move invisibly with the cannon
-        if(!isFiringp1) {
+        if(!isFiringp2) {
             this.alpha = 0;
-            if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
+            if(keyA.isDown && this.x >= borderUISize + this.width) {
                 this.x -= this.moveSpeed;
-            } else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width) {
+            } else if (keyD.isDown && this.x <= game.config.width - borderUISize - this.width) {
                 this.x += this.moveSpeed;
             }
         }
         // if fired, shoot the bullet
-        if(isFiringp1 && this.y >= borderUISize * 3 + borderPadding) {
+        if(isFiringp2 && this.y >= borderUISize * 3 + borderPadding) {
             this.alpha = 1;
             this.y -= this.moveSpeed;
         }
@@ -36,7 +36,7 @@ class Bullet extends Phaser.GameObjects.Sprite {
     // reset bullet to cannon position
     reset() {
         this.alpha = 0;
-        isFiringp1 = false;
+        isFiringp2 = false;
         this.y = game.config.height - borderUISize - borderPadding*4.7;
 
     }

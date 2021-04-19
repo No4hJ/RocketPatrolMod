@@ -1,5 +1,5 @@
-// Cannon (player1) prefab
-class Cannon extends Phaser.GameObjects.Sprite {
+// Cannon (player2) prefab
+class Cannon2 extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
 
@@ -14,16 +14,16 @@ class Cannon extends Phaser.GameObjects.Sprite {
 
     update() {
         // left/ right movement
-        if(!isFiringp1) {
-            if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
+        if(!isFiringp2) {
+            if(keyA.isDown && this.x >= borderUISize + this.width) {
                 this.x -= this.moveSpeed;
-            } else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width) {
+            } else if (keyD.isDown && this.x <= game.config.width - borderUISize - this.width) {
                 this.x += this.moveSpeed;
             }
         }
         // fire button
-        if(Phaser.Input.Keyboard.JustDown(keyUP) && !isFiringp1) {
-            isFiringp1 = true;
+        if(Phaser.Input.Keyboard.JustDown(keyW) && !isFiringp2) {
+            isFiringp2 = true;
             this.sfxRocket.play();   // play sfx
         }
     }
