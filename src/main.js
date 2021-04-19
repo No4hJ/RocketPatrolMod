@@ -14,7 +14,11 @@ let borderPadding = borderUISize / 3;
 let starSpeed = 2;
 
 // reserve keyboard bindings
-let keyF, keyR, keyM, keyLEFT, keyRIGHT;
-let highScore = [];
-let isFiring = false;
+let keyA, keyD, keyW, keyR, keyM, keyLEFT, keyRIGHT, keyUP;
 
+//highScore array that stores all the score
+let highScore = [];
+
+// define isFiring
+let isFiringp1 = false;
+let isFiringp2 = false;
