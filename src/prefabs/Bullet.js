@@ -37,7 +37,7 @@ class Bullet extends Phaser.GameObjects.Sprite {
     reset() {
         this.alpha = 0;
         this.y = game.config.height - borderUISize - borderPadding*4.7;
-                isFiringp1 = false;
+        isFiringp1 = false;
 
     }
 }
