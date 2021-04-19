@@ -12,6 +12,7 @@ class Play extends Phaser.Scene{
         this.load.image('spaceship', './assets/spaceship.png');
         this.load.image('rocket', './assets/rocket.png');
         this.load.image('starfield', './assets/starfield.png');
+        this.load.image('earth', './assets/earth.png');
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png', {
             frameWidth: 102,
@@ -22,12 +23,17 @@ class Play extends Phaser.Scene{
     }
 
     create() {
+
+        let music = this.sound.add('bgm');
         //initialize highest score
         this.highest = 0;
 
         //place starfield
+        this.earth = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'earth')
+        .setOrigin(0, 0);
         this.starfield = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'starfield')
         .setOrigin(0, 0);
+
 
         // green UI background
         this.add.rectangle(0, borderUISize + borderPadding, game.config.width, 
@@ -130,6 +136,7 @@ class Play extends Phaser.Scene{
             this.add.text(game.config.width/2, game.config.height/2 + 100, '(R) to Restart or (M) for Menu',
             scoreConfig).setOrigin(0.5);
             this.gameOver = true;
+            music.stop();
         }, null, this);
 
         //initialize timer
@@ -150,7 +157,9 @@ class Play extends Phaser.Scene{
         };
         this.timeLeft = this.add.text(game.config.width/2 - 100, borderUISize + borderPadding*2, 'TIME LEFT: ' + this.Timer, timeConfig).setOrigin(0, 0);
 
-
+        //play the background music
+        music.play();
+        
     }
 
     update(){

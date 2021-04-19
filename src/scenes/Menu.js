@@ -8,12 +8,13 @@ class Menu extends Phaser.Scene{
         this.load.audio('sfx_select', './assets/blip_select12.wav');
         this.load.audio('sfx_explosion', './assets/explosion38.wav');
         this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
+        this.load.audio('bgm','./assets/bgm.wav');
     }
     create() {
         // menu text configuration
         let menuConfig = {
             fontFamily: 'Courier',
-            fontSize: '38px',
+            fontSize: '40px',
             backgroundColor: '#F3B141',
             color: '#843605',
             align: 'right',
@@ -26,8 +27,8 @@ class Menu extends Phaser.Scene{
 
         // show menu text
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize -
-        borderPadding*1.2, 'GUARDIANS OF THE UNIVERSE', menuConfig).setOrigin(0.5);
-        menuConfig.fontSize = '28px';
+        borderPadding*3.8, 'GUARDIANS OF THE UNIVERSE', menuConfig).setOrigin(0.5);
+        menuConfig.fontSize = '22px';
         this.add.text(game.config.width/2, game.config.height/2, 'Player1: Use ←→ to move & ↑ to fire',
         menuConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + 40, 'Player2: Use A&D to move & W to fire',
