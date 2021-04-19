@@ -13,7 +13,7 @@ class Menu extends Phaser.Scene{
         // menu text configuration
         let menuConfig = {
             fontFamily: 'Courier',
-            fontSize: '28px',
+            fontSize: '38px',
             backgroundColor: '#F3B141',
             color: '#843605',
             align: 'right',
@@ -26,7 +26,8 @@ class Menu extends Phaser.Scene{
 
         // show menu text
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize -
-        borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
+        borderPadding*1.2, 'GUARDIANS OF THE UNIVERSE', menuConfig).setOrigin(0.5);
+        menuConfig.fontSize = '28px';
         this.add.text(game.config.width/2, game.config.height/2, 'Player1: Use ←→ to move & ↑ to fire',
         menuConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + 40, 'Player2: Use A&D to move & W to fire',
@@ -48,7 +49,7 @@ class Menu extends Phaser.Scene{
           game.settings = {
             spaceshipSpeed: 3,
             smallshipSpeed:5,
-            gameTimer: 6000    
+            gameTimer: 6000   
           }
           this.sound.play('sfx_select');
           this.scene.start('playScene');    

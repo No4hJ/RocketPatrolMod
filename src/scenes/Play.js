@@ -7,6 +7,7 @@ class Play extends Phaser.Scene{
     preload(){
         // load images/tile sprites
         this.load.image('cannon', './assets/gun.png');
+        this.load.image('cannon2','./assets/gun2.png');
         this.load.image('bullet', './assets/bullet.png');
         this.load.image('spaceship', './assets/spaceship.png');
         this.load.image('rocket', './assets/rocket.png');
@@ -49,7 +50,7 @@ class Play extends Phaser.Scene{
         borderUISize - borderPadding*4.7, 'bullet').setOrigin(0.5, 0);
         // add cannon and bullet (player 2)
         this.p2Cannon = new Cannon2(this, game.config.width/2 + 10, game.config.height - 
-        borderUISize - borderPadding*4.7, 'cannon').setOrigin(0.5, 0);
+        borderUISize - borderPadding*4.7, 'cannon2').setOrigin(0.5, 0);
         this.p2Bullet = new Bullet2(this, game.config.width/2 + 10, game.config.height - 
         borderUISize - borderPadding*4.7, 'bullet').setOrigin(0.5, 0);
 
@@ -99,7 +100,7 @@ class Play extends Phaser.Scene{
                 top: 5,
                 bottom: 5,
             },
-            fixedWidth: 100
+            fixedWidth: 0
         };
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + 
         borderPadding*2, 'P1: ' + this.p1Score, scoreConfig);
@@ -116,6 +117,7 @@ class Play extends Phaser.Scene{
             this.highest = Math.max(...highScore);
             console.log(this.highest);
             console.log(highScore);
+            this.add.text(game.config.width/2 - 100, borderUISize + borderPadding*2, 'TIME LEFT: 0', scoreConfig).setOrigin(0, 0);
             this.add.text(game.config.width/2, game.config.height/2 - 20, 'GAME OVER!!!', scoreConfig).setOrigin(0.5);
             if(this.p1Score > this.p2Score) {
                 this.add.text(game.config.width/2, game.config.height/2 + 20, 'P1 WIN!', scoreConfig).setOrigin(0.5);
