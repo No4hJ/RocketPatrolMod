@@ -16,9 +16,9 @@ class Bullet extends Phaser.GameObjects.Sprite {
         // move invisibly with the cannon
         if(!isFiringp1) {
             this.alpha = 0;
-            if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
+            if(keyLEFT.isDown && this.x >= borderUISize + this.width + 50) {
                 this.x -= this.moveSpeed;
-            } else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width) {
+            } else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width -50) {
                 this.x += this.moveSpeed;
             }
         }
@@ -36,8 +36,8 @@ class Bullet extends Phaser.GameObjects.Sprite {
     // reset bullet to cannon position
     reset() {
         this.alpha = 0;
-        isFiringp1 = false;
         this.y = game.config.height - borderUISize - borderPadding*4.7;
+                isFiringp1 = false;
 
     }
 }
