@@ -13,10 +13,10 @@ class Play extends Phaser.Scene{
         this.load.image('starfield', './assets/starfield.png');
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png', {
-            frameWidth: 64,
-            frameHeight: 32,
+            frameWidth: 102,
+            frameHeight: 36,
             startFrame: 0,
-            endFrame: 9
+            endFrame: 7
         });
     }
 
@@ -79,7 +79,7 @@ class Play extends Phaser.Scene{
             key: 'explode',
             frames: this.anims.generateFrameNumbers('explosion', {
                 start: 0,
-                end: 9,
+                end: 7,
                 first: 0
             }),
             frameRate: 30
